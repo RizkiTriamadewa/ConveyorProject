@@ -9,13 +9,17 @@ public class TransformZone : MonoBehaviour
     {
         if (other.CompareTag("Bottle") || other.GetComponent<BottleMover>())
         {
-            Vector3 spawnPos = other.transform.position;
+            // Tambahkan offset ke arah Z depan botol (1 unit)
+            Vector3 spawnPos = other.transform.position + other.transform.forward * 1.0f;
             Quaternion spawnRot = other.transform.rotation;
 
-            Destroy(other.gameObject); // Hancurkan botol
-            Instantiate(replacementPrefab, spawnPos, spawnRot); // Ganti jadi kacamata
+            // Hancurkan botol
+            Destroy(other.gameObject);
 
-            Debug.Log("Botol telah diubah menjadi kacamata!");
+            // Spawn prefab di posisi yang telah disesuaikan
+            Instantiate(replacementPrefab, spawnPos, spawnRot);
+
+            Debug.Log("Botol telah diubah menjadi kacamata di depan!");
         }
     }
 }
