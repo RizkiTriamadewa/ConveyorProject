@@ -8,6 +8,7 @@ TagManager:
   - Coin
   - Bottle
   - Glasess
+  - Cylinder
   layers:
   - Default
   - TransparentFX
