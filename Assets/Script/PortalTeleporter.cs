@@ -6,18 +6,24 @@ public class PortalTeleporter : MonoBehaviour
     [Tooltip("Portal tujuan teleportasi")]
     public Transform targetPortal;
 
+    [Tooltip("Offset vertikal untuk menyesuaikan tinggi XR Origin saat teleportasi")]
+    public float verticalOffset = 1.5f;
+
     private void OnTriggerEnter(Collider other)
     {
-        // Cek apakah ada XR Origin (XR Rig) di parent collider yang menyentuh trigger
+        // Cek apakah collider yang masuk adalah XR Origin (XR Rig)
         XROrigin xrOrigin = other.GetComponentInParent<XROrigin>();
         if (xrOrigin == null || targetPortal == null)
             return;
 
-        // Teleport langsung ke posisi portal
-        xrOrigin.transform.position = targetPortal.position;
+        // Ambil posisi target portal dan tambahkan offset ke atas
+        Vector3 destination = targetPortal.position + Vector3.up * verticalOffset;
+
+        // Teleportasi XR Origin ke posisi tersebut
+        xrOrigin.transform.position = destination;
     }
 
-    // Opsional: Visualisasi target portal
+    // Opsional: Visualisasi posisi target portal di Scene view
     private void OnDrawGizmos()
     {
         if (targetPortal != null)
