@@ -9,6 +9,7 @@ TagManager:
   - Bottle
   - Glasess
   - Cylinder
+  - Ground
   layers:
   - Default
   - TransparentFX

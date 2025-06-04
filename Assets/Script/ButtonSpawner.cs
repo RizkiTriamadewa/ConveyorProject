@@ -16,6 +16,13 @@ public class ButtonSpawner : MonoBehaviour
 
     private bool hasSpawned = false;
 
+    private AudioSource audioSource;
+
+    private void Start()
+    {
+        audioSource = GetComponent<AudioSource>();
+    }
+
     private void OnTriggerEnter(Collider other)
     {
         if (!hasSpawned && other.CompareTag(triggerTag))
@@ -30,6 +37,10 @@ public class ButtonSpawner : MonoBehaviour
     private void SpawnCoin()
     {
         Instantiate(coinPrefab, spawnPoint.position, Quaternion.identity);
+
+        if (audioSource != null)
+            audioSource.Play();
+
         Debug.Log("Koin telah muncul karena silinder menekan tombol.");
     }
 }
